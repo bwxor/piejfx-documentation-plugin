@@ -1,6 +1,7 @@
 package com.bwxor.piejfxsdk.service;
 
 import com.bwxor.piejfxsdk.state.SRSDocumentState;
+import com.bwxor.piejfxsdk.state.ServiceState;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -8,6 +9,7 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -310,12 +312,58 @@ public class GenerateSRSPDFService {
     }
 
     private void createNewPage(PDDocument document) throws IOException {
+        SRSDocumentState srsDocumentState = SRSDocumentState.instance;
+        ServiceState serviceState = ServiceState.instance;
+
         closeCurrentStream();
 
         currentPage = new PDPage(PDRectangle.A4);
         document.addPage(currentPage);
 
-        currentStream = new PDPageContentStream(document, currentPage);
+        if (srsDocumentState.getWatermarkFile() != null) {
+            PDImageXObject pdImage = PDImageXObject.createFromFile(srsDocumentState.getWatermarkFile().getPath(), document);
+
+            float imgWidth = (float) (pdImage.getWidth() * srsDocumentState.getWatermarkScale());
+            float imgHeight = (float) (pdImage.getHeight() * srsDocumentState.getWatermarkScale());
+            float margin = 20f;
+
+            PDRectangle mediaBox = currentPage.getMediaBox();
+            float pageWidth = mediaBox.getWidth();
+            float pageHeight = mediaBox.getHeight();
+
+            float x = 0;
+            float y = 0;
+
+            switch (srsDocumentState.getWatermarkPosition()) {
+                case TOP_LEFT:
+                    x = margin;
+                    y = pageHeight - imgHeight - margin;
+                    break;
+
+                case TOP_RIGHT:
+                    x = pageWidth - imgWidth - margin;
+                    y = pageHeight - imgHeight - margin;
+                    break;
+
+                case BOTTOM_LEFT:
+                    x = margin;
+                    y = margin;
+                    break;
+
+                case BOTTOM_RIGHT:
+                    x = pageWidth - imgWidth - margin;
+                    y = margin;
+                    break;
+            }
+
+            try (PDPageContentStream contentStream = new PDPageContentStream(
+                    document, currentPage, PDPageContentStream.AppendMode.APPEND, true, true)) {
+
+                contentStream.drawImage(pdImage, x, y, imgWidth, imgHeight);
+            }
+        }
+
+        currentStream = new PDPageContentStream(document, currentPage, PDPageContentStream.AppendMode.APPEND, true, true);
         currentY = TOP_MARGIN;
     }
 

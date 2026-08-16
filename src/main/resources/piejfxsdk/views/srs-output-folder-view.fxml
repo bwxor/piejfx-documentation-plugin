@@ -4,8 +4,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#onKeyPressed"
-            prefHeight="220.0" prefWidth="520.0" styleClass="window-root" xmlns="http://javafx.com/javafx/17.0.12"
+            prefHeight="350.0" prefWidth="520.0" styleClass="window-root" xmlns="http://javafx.com/javafx/17.0.12"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.bwxor.piejfxsdk.controller.impl.SRSOutputFolderViewController">
     <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="app-window"
@@ -30,30 +32,71 @@
 
             <!-- Main Content -->
             <AnchorPane styleClass="main-content" VBox.vgrow="ALWAYS">
-                <VBox spacing="8" fillWidth="true"
-                      AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0"
-                      AnchorPane.rightAnchor="10.0" AnchorPane.bottomAnchor="10.0">
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER"
+                            AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <VBox spacing="8" fillWidth="true"
+                          AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0"
+                          AnchorPane.rightAnchor="10.0" AnchorPane.bottomAnchor="10.0">
 
-                    <Label text="Output Folder" styleClass="label-subtle"/>
-                    <HBox spacing="6" alignment="CENTER_LEFT">
-                        <TextField fx:id="outputFolderField" HBox.hgrow="ALWAYS" maxWidth="Infinity"
-                                   editable="false" promptText="Select a folder..."/>
-                        <Button fx:id="buttonBrowse" mnemonicParsing="false" onAction="#onBrowseButtonClick"
-                                text="..."/>
-                    </HBox>
+                        <Label text="Watermark File" styleClass="label-subtle"/>
+                        <HBox spacing="6" alignment="CENTER_LEFT">
+                            <TextField fx:id="watermarkFileField" HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                                       editable="false" promptText="Select an image..."/>
+                            <Button fx:id="buttonBrowseWatermarkFile" mnemonicParsing="false"
+                                    onAction="#onBrowseWatermarkFileButtonClick"
+                                    text="..."/>
+                            <Button fx:id="buttonClearWatermarkFile" mnemonicParsing="false"
+                                    onAction="#onClearWatermarkFileButtonClick"
+                                    text="Clear"/>
+                        </HBox>
 
-                    <!-- Navigation buttons -->
-                    <ButtonBar>
-                        <buttons>
-                            <Button fx:id="buttonBack" mnemonicParsing="false" onAction="#onBackButtonClick" text="Back"/>
-                            <Button fx:id="buttonGenerate" mnemonicParsing="false" onAction="#onGenerateButtonClick" text="Generate"/>
-                            <Button fx:id="buttonCancel" mnemonicParsing="false" onAction="#onCancelButtonClick" text="Cancel"/>
-                        </buttons>
-                    </ButtonBar>
-                </VBox>
+                        <Label text="Watermark Position" styleClass="label-subtle"/>
+                        <ComboBox fx:id="watermarkPositionComboBox" id="comboId" layoutX="210.0" layoutY="108.0"
+                                  prefHeight="27.0"
+                                  prefWidth="102.0" value="Top-Left">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Top-Left"/>
+                                    <String fx:value="Top-Right"/>
+                                    <String fx:value="Bottom-Left"/>
+                                    <String fx:value="Bottom-Right"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+
+                        <Label text="Watermark Scale" styleClass="label-subtle"/>
+                        <TextField fx:id="watermarkScaleField" HBox.hgrow="ALWAYS" maxWidth="Infinity" promptText="e.g. 0.25"/>
+
+                        <Label text="Output Folder" styleClass="label-subtle"/>
+                        <HBox spacing="6" alignment="CENTER_LEFT">
+                            <TextField fx:id="outputFolderField" HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                                       editable="false" promptText="Select a folder..."/>
+                            <Button fx:id="buttonBrowseOutputFolder" mnemonicParsing="false"
+                                    onAction="#onBrowseOutputFolderButtonClick"
+                                    text="..."/>
+                        </HBox>
+
+                        <!-- Navigation buttons -->
+                        <ButtonBar>
+                            <buttons>
+                                <Button fx:id="buttonBack" mnemonicParsing="false" onAction="#onBackButtonClick"
+                                        text="Back"/>
+                                <Button fx:id="buttonGenerate" mnemonicParsing="false" onAction="#onGenerateButtonClick"
+                                        text="Generate"/>
+                                <Button fx:id="buttonCancel" mnemonicParsing="false" onAction="#onCancelButtonClick"
+                                        text="Cancel"/>
+                            </buttons>
+                        </ButtonBar>
+                    </VBox>
+                </ScrollPane>
             </AnchorPane>
         </children>
-        <VBox.margin><Insets/></VBox.margin>
+        <VBox.margin>
+            <Insets/>
+        </VBox.margin>
     </VBox>
-    <padding><Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/></padding>
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+    </padding>
 </AnchorPane>

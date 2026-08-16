@@ -1,6 +1,9 @@
 package com.bwxor.piejfxsdk.state;
 
 import com.bwxor.piejfxsdk.dto.*;
+import com.bwxor.piejfxsdk.type.WatermarkPosition;
+
+import java.io.File;
 
 public class SRSDocumentState {
     public static final SRSDocumentState instance = new SRSDocumentState();
@@ -13,6 +16,9 @@ public class SRSDocumentState {
     private SRSDocumentExternalInterfaceRequirements srsDocumentExternalInterfaceRequirements;
     private SRSDocumentUseCases srsDocumentUseCases;
     private SRSDocumentAppendices srsDocumentAppendices;
+    private File watermarkFile;
+    private WatermarkPosition watermarkPosition;
+    private double watermarkScale;
 
     private SRSDocumentState() {}
 
@@ -86,5 +92,29 @@ public class SRSDocumentState {
 
     public void setSrsDocumentAppendices(SRSDocumentAppendices srsDocumentAppendices) {
         this.srsDocumentAppendices = srsDocumentAppendices;
+    }
+
+    public File getWatermarkFile() {
+        return watermarkFile;
+    }
+
+    public void setWatermarkFile(File watermarkFile) {
+        this.watermarkFile = watermarkFile;
+    }
+
+    public WatermarkPosition getWatermarkPosition() {
+        return watermarkPosition;
+    }
+
+    public void setWatermarkPosition(WatermarkPosition watermarkPosition) {
+        this.watermarkPosition = watermarkPosition;
+    }
+
+    public double getWatermarkScale() {
+        return watermarkScale;
+    }
+
+    public void setWatermarkScale(double watermarkScale) {
+        this.watermarkScale = watermarkScale;
     }
 }

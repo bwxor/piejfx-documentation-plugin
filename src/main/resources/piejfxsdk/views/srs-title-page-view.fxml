@@ -3,12 +3,11 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.ToggleGroup?>
 
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#onKeyPressed"
-            prefHeight="540.0" prefWidth="520.0" styleClass="window-root" xmlns="http://javafx.com/javafx/17.0.12"
+            prefHeight="400.0" prefWidth="520.0" styleClass="window-root" xmlns="http://javafx.com/javafx/17.0.12"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.bwxor.piejfxsdk.controller.impl.SRSTitlePageController">
     <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="app-window"
