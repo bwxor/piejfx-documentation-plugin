@@ -7,6 +7,7 @@ import com.bwxor.piejfxsdk.state.ServiceState;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -17,12 +18,12 @@ public class SRSNonFunctionalRequirementsViewController extends MovableViewContr
     private static final String EMPTY_LABEL = "Empty";
 
     @FXML private Label windowTitle;
-    @FXML private Label performancePreview;
-    @FXML private Label securityPreview;
-    @FXML private Label usabilityPreview;
-    @FXML private Label reliabilityPreview;
-    @FXML private Label scalabilityPreview;
-    @FXML private Label compliancePreview;
+    @FXML private TextField performancePreview;
+    @FXML private TextField securityPreview;
+    @FXML private TextField usabilityPreview;
+    @FXML private TextField reliabilityPreview;
+    @FXML private TextField scalabilityPreview;
+    @FXML private TextField compliancePreview;
     @FXML private Button buttonCancel;
 
     private String performanceValue = "";

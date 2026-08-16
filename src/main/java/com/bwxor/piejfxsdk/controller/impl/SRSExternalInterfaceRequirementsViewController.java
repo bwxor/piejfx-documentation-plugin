@@ -7,6 +7,7 @@ import com.bwxor.piejfxsdk.state.ServiceState;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -17,10 +18,10 @@ public class SRSExternalInterfaceRequirementsViewController extends MovableViewC
     private static final String EMPTY_LABEL = "Empty";
 
     @FXML private Label windowTitle;
-    @FXML private Label userInterfacesPreview;
-    @FXML private Label hardwareInterfacesPreview;
-    @FXML private Label softwareInterfacesPreview;
-    @FXML private Label communicationInterfacesPreview;
+    @FXML private TextField userInterfacesPreview;
+    @FXML private TextField hardwareInterfacesPreview;
+    @FXML private TextField softwareInterfacesPreview;
+    @FXML private TextField communicationInterfacesPreview;
     @FXML private Button buttonCancel;
 
     private String userInterfacesValue = "";

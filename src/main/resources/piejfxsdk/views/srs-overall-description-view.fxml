@@ -38,7 +38,7 @@
                         <!-- Product Perspective -->
                         <Label text="Product Perspective" styleClass="label-subtle"/>
                         <HBox spacing="6" alignment="CENTER_LEFT">
-                            <Label fx:id="productPerspectivePreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <TextField fx:id="productPerspectivePreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
                             <Button mnemonicParsing="false" onAction="#onEditProductPerspectiveClick" text="Edit"/>
                         </HBox>
 
@@ -56,14 +56,14 @@
                         <!-- Operating Environment -->
                         <Label text="Operating Environment" styleClass="label-subtle"/>
                         <HBox spacing="6" alignment="CENTER_LEFT">
-                            <Label fx:id="operatingEnvironmentPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <TextField fx:id="operatingEnvironmentPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
                             <Button mnemonicParsing="false" onAction="#onEditOperatingEnvironmentClick" text="Edit"/>
                         </HBox>
 
                         <!-- Constraints -->
                         <Label text="Constraints" styleClass="label-subtle"/>
                         <HBox spacing="6" alignment="CENTER_LEFT">
-                            <Label fx:id="constraintsPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <TextField fx:id="constraintsPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
                             <Button mnemonicParsing="false" onAction="#onEditConstraintsClick" text="Edit"/>
                         </HBox>
 

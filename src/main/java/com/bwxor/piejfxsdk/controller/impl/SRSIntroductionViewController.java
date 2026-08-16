@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
@@ -28,8 +29,8 @@ public class SRSIntroductionViewController extends MovableViewController {
     private static final String EMPTY_LABEL = "Empty";
 
     @FXML private Label windowTitle;
-    @FXML private Label purposePreview;
-    @FXML private Label scopePreview;
+    @FXML private TextField purposePreview;
+    @FXML private TextField scopePreview;
     @FXML private ListView<Pair<String, String>> definitionsList;
     @FXML private ListView<String> referencesList;
     @FXML private Button buttonCancel;

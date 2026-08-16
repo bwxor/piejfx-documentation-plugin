@@ -38,14 +38,14 @@
                         <!-- Purpose -->
                         <Label text="Purpose" styleClass="label-subtle"/>
                         <HBox spacing="6" alignment="CENTER_LEFT">
-                            <Label fx:id="purposePreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <TextField fx:id="purposePreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
                             <Button mnemonicParsing="false" onAction="#onEditPurposeClick" text="Edit"/>
                         </HBox>
 
                         <!-- Scope -->
                         <Label text="Scope" styleClass="label-subtle"/>
                         <HBox spacing="6" alignment="CENTER_LEFT">
-                            <Label fx:id="scopePreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <TextField fx:id="scopePreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
                             <Button mnemonicParsing="false" onAction="#onEditScopeClick" text="Edit"/>
                         </HBox>
 

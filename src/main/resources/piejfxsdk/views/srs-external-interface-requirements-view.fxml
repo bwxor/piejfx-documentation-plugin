@@ -37,25 +37,25 @@
 
                         <Label text="User Interfaces" styleClass="label-subtle"/>
                         <HBox spacing="6" alignment="CENTER_LEFT">
-                            <Label fx:id="userInterfacesPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <TextField fx:id="userInterfacesPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
                             <Button mnemonicParsing="false" onAction="#onEditUserInterfacesClick" text="Edit"/>
                         </HBox>
 
                         <Label text="Hardware Interfaces" styleClass="label-subtle"/>
                         <HBox spacing="6" alignment="CENTER_LEFT">
-                            <Label fx:id="hardwareInterfacesPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <TextField fx:id="hardwareInterfacesPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
                             <Button mnemonicParsing="false" onAction="#onEditHardwareInterfacesClick" text="Edit"/>
                         </HBox>
 
                         <Label text="Software Interfaces" styleClass="label-subtle"/>
                         <HBox spacing="6" alignment="CENTER_LEFT">
-                            <Label fx:id="softwareInterfacesPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <TextField fx:id="softwareInterfacesPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
                             <Button mnemonicParsing="false" onAction="#onEditSoftwareInterfacesClick" text="Edit"/>
                         </HBox>
 
                         <Label text="Communication Interfaces" styleClass="label-subtle"/>
                         <HBox spacing="6" alignment="CENTER_LEFT">
-                            <Label fx:id="communicationInterfacesPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <TextField fx:id="communicationInterfacesPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
                             <Button mnemonicParsing="false" onAction="#onEditCommunicationInterfacesClick" text="Edit"/>
                         </HBox>
 

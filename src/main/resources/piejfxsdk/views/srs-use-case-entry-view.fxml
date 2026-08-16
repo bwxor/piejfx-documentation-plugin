@@ -38,16 +38,28 @@
                     <TextField fx:id="actorField" maxWidth="Infinity" promptText="e.g. End User"/>
 
                     <Label text="Preconditions" styleClass="label-subtle"/>
-                    <TextField fx:id="preconditionsField" maxWidth="Infinity"/>
+                    <HBox spacing="6" alignment="CENTER_LEFT">
+                        <TextField fx:id="preconditionsField" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
+                        <Button mnemonicParsing="false" onAction="#onEditPreconditionsClick" text="Edit"/>
+                    </HBox>
 
                     <Label text="Main Flow" styleClass="label-subtle"/>
-                    <TextField fx:id="mainFlowField" maxWidth="Infinity"/>
+                    <HBox spacing="6" alignment="CENTER_LEFT">
+                        <TextField fx:id="mainFlowField" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
+                        <Button mnemonicParsing="false" onAction="#onEditMainFlowClick" text="Edit"/>
+                    </HBox>
 
                     <Label text="Alternate Flow" styleClass="label-subtle"/>
-                    <TextField fx:id="alternateFlowField" maxWidth="Infinity"/>
+                    <HBox spacing="6" alignment="CENTER_LEFT">
+                        <TextField fx:id="alternateFlowField" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
+                        <Button mnemonicParsing="false" onAction="#onEditAlternateFlowClick" text="Edit"/>
+                    </HBox>
 
                     <Label text="Post Conditions" styleClass="label-subtle"/>
-                    <TextField fx:id="postConditionsField" maxWidth="Infinity"/>
+                    <HBox spacing="6" alignment="CENTER_LEFT">
+                        <TextField fx:id="postConditionsField" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
+                        <Button mnemonicParsing="false" onAction="#onEditPostConditionsClick" text="Edit"/>
+                    </HBox>
 
                     <ButtonBar>
                         <buttons>

@@ -37,37 +37,37 @@
 
                         <Label text="Performance Requirements" styleClass="label-subtle"/>
                         <HBox spacing="6" alignment="CENTER_LEFT">
-                            <Label fx:id="performancePreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <TextField fx:id="performancePreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
                             <Button mnemonicParsing="false" onAction="#onEditPerformanceClick" text="Edit"/>
                         </HBox>
 
                         <Label text="Security Requirements" styleClass="label-subtle"/>
                         <HBox spacing="6" alignment="CENTER_LEFT">
-                            <Label fx:id="securityPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <TextField fx:id="securityPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
                             <Button mnemonicParsing="false" onAction="#onEditSecurityClick" text="Edit"/>
                         </HBox>
 
                         <Label text="Usability Requirements" styleClass="label-subtle"/>
                         <HBox spacing="6" alignment="CENTER_LEFT">
-                            <Label fx:id="usabilityPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <TextField fx:id="usabilityPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
                             <Button mnemonicParsing="false" onAction="#onEditUsabilityClick" text="Edit"/>
                         </HBox>
 
                         <Label text="Reliability Requirements" styleClass="label-subtle"/>
                         <HBox spacing="6" alignment="CENTER_LEFT">
-                            <Label fx:id="reliabilityPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <TextField fx:id="reliabilityPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
                             <Button mnemonicParsing="false" onAction="#onEditReliabilityClick" text="Edit"/>
                         </HBox>
 
                         <Label text="Scalability Requirements" styleClass="label-subtle"/>
                         <HBox spacing="6" alignment="CENTER_LEFT">
-                            <Label fx:id="scalabilityPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <TextField fx:id="scalabilityPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
                             <Button mnemonicParsing="false" onAction="#onEditScalabilityClick" text="Edit"/>
                         </HBox>
 
                         <Label text="Compliance Requirements" styleClass="label-subtle"/>
                         <HBox spacing="6" alignment="CENTER_LEFT">
-                            <Label fx:id="compliancePreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <TextField fx:id="compliancePreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
                             <Button mnemonicParsing="false" onAction="#onEditComplianceClick" text="Edit"/>
                         </HBox>
 
