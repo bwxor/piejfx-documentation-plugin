@@ -1,40 +1,91 @@
 package com.bwxor.piejfxsdk.state;
 
-import com.bwxor.piejfxsdk.service.CreateGenerateSRSDocumentViewService;
-import com.bwxor.piejfxsdk.service.ResourceService;
-import com.bwxor.plugin.service.PluginFileService;
+import com.bwxor.piejfxsdk.service.*;
 import com.bwxor.plugin.service.PluginNotificationService;
-import com.bwxor.plugin.service.PluginTerminalTabPaneService;
 
 public class ServiceState {
     private PluginNotificationService notificationService;
     private ResourceService resourceService;
-    private CreateGenerateSRSDocumentViewService createGenerateSRSDocumentViewService;
+
+    // Page-navigation services
+    private ShowSRSTitlePageViewService showSRSTitlePageViewService;
+    private ShowSRSRevisionHistoryViewService showSRSRevisionHistoryViewService;
+    private ShowSRSIntroductionViewService showSRSIntroductionViewService;
+    private ShowSRSOverallDescriptionViewService showSRSOverallDescriptionViewService;
+    private ShowSRSFunctionalRequirementsViewService showSRSFunctionalRequirementsViewService;
+    private ShowSRSNonFunctionalRequirementsViewService showSRSNonFunctionalRequirementsViewService;
+    private ShowSRSExternalInterfaceRequirementsViewService showSRSExternalInterfaceRequirementsViewService;
+    private ShowSRSUseCasesViewService showSRSUseCasesViewService;
+    private ShowSRSAppendicesViewService showSRSAppendicesViewService;
+    private ShowSRSOutputFolderViewService showSRSOutputFolderViewService;
+    private GenerateSRSPDFService generateSRSPDFService;
+
+    // Entry sub-view services
+    private SRSRevisionEntryViewService srsRevisionEntryViewService;
+    private SRSKeyValueEntryViewService srsKeyValueEntryViewService;
+    private SRSStringEntryViewService srsStringEntryViewService;
+    private SRSRequirementEntryViewService srsRequirementEntryViewService;
+    private SRSUseCaseEntryViewService srsUseCaseEntryViewService;
+
     public static final ServiceState instance = new ServiceState();
 
-    private ServiceState(){}
+    private ServiceState() {}
 
-    public PluginNotificationService getNotificationService() {
-        return notificationService;
-    }
+    public PluginNotificationService getNotificationService() { return notificationService; }
+    public void setNotificationService(PluginNotificationService v) { this.notificationService = v; }
 
-    public void setNotificationService(PluginNotificationService notificationService) {
-        this.notificationService = notificationService;
-    }
+    public ResourceService getResourceService() { return resourceService; }
+    public void setResourceService(ResourceService v) { this.resourceService = v; }
 
-    public ResourceService getResourceService() {
-        return resourceService;
-    }
+    public ShowSRSTitlePageViewService getShowSRSTitlePageViewService() { return showSRSTitlePageViewService; }
+    public void setShowSRSTitlePageViewService(ShowSRSTitlePageViewService v) { this.showSRSTitlePageViewService = v; }
 
-    public void setResourceService(ResourceService resourceService) {
-        this.resourceService = resourceService;
-    }
+    public ShowSRSRevisionHistoryViewService getShowSRSRevisionHistoryViewService() { return showSRSRevisionHistoryViewService; }
+    public void setShowSRSRevisionHistoryViewService(ShowSRSRevisionHistoryViewService v) { this.showSRSRevisionHistoryViewService = v; }
 
-    public CreateGenerateSRSDocumentViewService getCreateGenerateSRSDocumentViewService() {
-        return createGenerateSRSDocumentViewService;
-    }
+    public ShowSRSIntroductionViewService getShowSRSIntroductionViewService() { return showSRSIntroductionViewService; }
+    public void setShowSRSIntroductionViewService(ShowSRSIntroductionViewService v) { this.showSRSIntroductionViewService = v; }
 
-    public void setCreateGenerateSRSDocumentViewService(CreateGenerateSRSDocumentViewService createGenerateSRSDocumentViewService) {
-        this.createGenerateSRSDocumentViewService = createGenerateSRSDocumentViewService;
-    }
+    public ShowSRSOverallDescriptionViewService getShowSRSOverallDescriptionViewService() { return showSRSOverallDescriptionViewService; }
+    public void setShowSRSOverallDescriptionViewService(ShowSRSOverallDescriptionViewService v) { this.showSRSOverallDescriptionViewService = v; }
+
+    public ShowSRSFunctionalRequirementsViewService getShowSRSFunctionalRequirementsViewService() { return showSRSFunctionalRequirementsViewService; }
+    public void setShowSRSFunctionalRequirementsViewService(ShowSRSFunctionalRequirementsViewService v) { this.showSRSFunctionalRequirementsViewService = v; }
+
+    public ShowSRSNonFunctionalRequirementsViewService getShowSRSNonFunctionalRequirementsViewService() { return showSRSNonFunctionalRequirementsViewService; }
+    public void setShowSRSNonFunctionalRequirementsViewService(ShowSRSNonFunctionalRequirementsViewService v) { this.showSRSNonFunctionalRequirementsViewService = v; }
+
+    public ShowSRSExternalInterfaceRequirementsViewService getShowSRSExternalInterfaceRequirementsViewService() { return showSRSExternalInterfaceRequirementsViewService; }
+    public void setShowSRSExternalInterfaceRequirementsViewService(ShowSRSExternalInterfaceRequirementsViewService v) { this.showSRSExternalInterfaceRequirementsViewService = v; }
+
+    public ShowSRSUseCasesViewService getShowSRSUseCasesViewService() { return showSRSUseCasesViewService; }
+    public void setShowSRSUseCasesViewService(ShowSRSUseCasesViewService v) { this.showSRSUseCasesViewService = v; }
+
+    public ShowSRSAppendicesViewService getShowSRSAppendicesViewService() { return showSRSAppendicesViewService; }
+    public void setShowSRSAppendicesViewService(ShowSRSAppendicesViewService v) { this.showSRSAppendicesViewService = v; }
+
+    public ShowSRSOutputFolderViewService getShowSRSOutputFolderViewService() { return showSRSOutputFolderViewService; }
+    public void setShowSRSOutputFolderViewService(ShowSRSOutputFolderViewService v) { this.showSRSOutputFolderViewService = v; }
+
+    public GenerateSRSPDFService getGenerateSRSPDFService() { return generateSRSPDFService; }
+    public void setGenerateSRSPDFService(GenerateSRSPDFService v) { this.generateSRSPDFService = v; }
+
+    public SRSRevisionEntryViewService getSrsRevisionEntryViewService() { return srsRevisionEntryViewService; }
+    public void setSrsRevisionEntryViewService(SRSRevisionEntryViewService v) { this.srsRevisionEntryViewService = v; }
+
+    public SRSKeyValueEntryViewService getSrsKeyValueEntryViewService() { return srsKeyValueEntryViewService; }
+    public void setSrsKeyValueEntryViewService(SRSKeyValueEntryViewService v) { this.srsKeyValueEntryViewService = v; }
+
+    public SRSStringEntryViewService getSrsStringEntryViewService() { return srsStringEntryViewService; }
+    public void setSrsStringEntryViewService(SRSStringEntryViewService v) { this.srsStringEntryViewService = v; }
+
+    public SRSRequirementEntryViewService getSrsRequirementEntryViewService() { return srsRequirementEntryViewService; }
+    public void setSrsRequirementEntryViewService(SRSRequirementEntryViewService v) { this.srsRequirementEntryViewService = v; }
+
+    public SRSUseCaseEntryViewService getSrsUseCaseEntryViewService() { return srsUseCaseEntryViewService; }
+    public void setSrsUseCaseEntryViewService(SRSUseCaseEntryViewService v) { this.srsUseCaseEntryViewService = v; }
+
+    private SRSTextAreaEditViewService srsTextAreaEditViewService;
+    public SRSTextAreaEditViewService getSrsTextAreaEditViewService() { return srsTextAreaEditViewService; }
+    public void setSrsTextAreaEditViewService(SRSTextAreaEditViewService v) { this.srsTextAreaEditViewService = v; }
 }

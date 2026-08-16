@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#onKeyPressed"
+            prefHeight="480.0" prefWidth="560.0" styleClass="window-root" xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.bwxor.piejfxsdk.controller.impl.SRSOverallDescriptionViewController">
+    <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="app-window"
+          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
+        <children>
+            <!-- Title Bar -->
+            <AnchorPane fx:id="titleBarAnchorPane" onMouseDragged="#handleMovementAction"
+                        onMousePressed="#handleClickAction" prefHeight="35.0" prefWidth="560.0">
+                <children>
+                    <Label fx:id="windowTitle" alignment="CENTER" layoutY="12.0" prefHeight="17.0" prefWidth="560.0"
+                           styleClass="window-title" text="Generate SRS Document" AnchorPane.bottomAnchor="0.0"
+                           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                    <Button fx:id="closeButton" mnemonicParsing="false" onAction="#onCloseButtonClick"
+                            prefHeight="25.0" prefWidth="40.0" styleClass="button-close" text="✕"
+                            AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0"/>
+                    <Button fx:id="minimizeButton" mnemonicParsing="false" onAction="#onMinimizeButtonClick"
+                            prefHeight="25.0" prefWidth="40.0" styleClass="button-minimize" text="─"
+                            AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="5.0"/>
+                </children>
+            </AnchorPane>
+
+            <!-- Main Content -->
+            <AnchorPane styleClass="main-content" VBox.vgrow="ALWAYS">
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER"
+                            AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <VBox spacing="8" fillWidth="true" style="-fx-padding: 10;">
+
+                        <!-- Product Perspective -->
+                        <Label text="Product Perspective" styleClass="label-subtle"/>
+                        <HBox spacing="6" alignment="CENTER_LEFT">
+                            <Label fx:id="productPerspectivePreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <Button mnemonicParsing="false" onAction="#onEditProductPerspectiveClick" text="Edit"/>
+                        </HBox>
+
+                        <!-- User Classes and Characteristics -->
+                        <Label text="User Classes and Characteristics" styleClass="label-subtle"/>
+                        <ListView fx:id="userClassesList" prefHeight="100.0" maxWidth="Infinity"
+                                  onMouseClicked="#onListMouseClicked">
+                            <placeholder><Label text="No user classes added yet."/></placeholder>
+                        </ListView>
+                        <HBox spacing="6">
+                            <Button fx:id="buttonAddUserClass" mnemonicParsing="false" onAction="#onAddUserClassClick" text="Add"/>
+                            <Button fx:id="buttonRemoveUserClass" mnemonicParsing="false" onAction="#onRemoveUserClassClick" text="Remove"/>
+                        </HBox>
+
+                        <!-- Operating Environment -->
+                        <Label text="Operating Environment" styleClass="label-subtle"/>
+                        <HBox spacing="6" alignment="CENTER_LEFT">
+                            <Label fx:id="operatingEnvironmentPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <Button mnemonicParsing="false" onAction="#onEditOperatingEnvironmentClick" text="Edit"/>
+                        </HBox>
+
+                        <!-- Constraints -->
+                        <Label text="Constraints" styleClass="label-subtle"/>
+                        <HBox spacing="6" alignment="CENTER_LEFT">
+                            <Label fx:id="constraintsPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <Button mnemonicParsing="false" onAction="#onEditConstraintsClick" text="Edit"/>
+                        </HBox>
+
+                        <!-- Navigation buttons -->
+                        <ButtonBar>
+                            <buttons>
+                                <Button fx:id="buttonBack" mnemonicParsing="false" onAction="#onBackButtonClick" text="Back"/>
+                                <Button fx:id="buttonNext" mnemonicParsing="false" onAction="#onNextButtonClick" text="Next"/>
+                                <Button fx:id="buttonCancel" mnemonicParsing="false" onAction="#onCancelButtonClick" text="Cancel"/>
+                            </buttons>
+                        </ButtonBar>
+                    </VBox>
+                </ScrollPane>
+            </AnchorPane>
+        </children>
+        <VBox.margin><Insets/></VBox.margin>
+    </VBox>
+    <padding><Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/></padding>
+</AnchorPane>

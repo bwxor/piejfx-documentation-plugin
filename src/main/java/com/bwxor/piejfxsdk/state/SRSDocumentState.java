@@ -5,6 +5,7 @@ import com.bwxor.piejfxsdk.dto.*;
 public class SRSDocumentState {
     public static final SRSDocumentState instance = new SRSDocumentState();
     private SRSDocumentTitlePage srsDocumentTitlePage;
+    private SRSDocumentRevisionHistory srsDocumentRevisionHistory;
     private SRSDocumentIntroduction srsDocumentIntroduction;
     private SRSDocumentOverallDescription srsDocumentOverallDescription;
     private SRSDocumentFunctionalRequirements srsDocumentFunctionalRequirements;
@@ -21,6 +22,14 @@ public class SRSDocumentState {
 
     public void setSrsDocumentTitlePage(SRSDocumentTitlePage srsDocumentTitlePage) {
         this.srsDocumentTitlePage = srsDocumentTitlePage;
+    }
+
+    public SRSDocumentRevisionHistory getSrsDocumentRevisionHistory() {
+        return srsDocumentRevisionHistory;
+    }
+
+    public void setSrsDocumentRevisionHistory(SRSDocumentRevisionHistory srsDocumentRevisionHistory) {
+        this.srsDocumentRevisionHistory = srsDocumentRevisionHistory;
     }
 
     public SRSDocumentIntroduction getSrsDocumentIntroduction() {

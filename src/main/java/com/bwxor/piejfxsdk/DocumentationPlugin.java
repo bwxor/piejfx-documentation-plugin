@@ -1,7 +1,6 @@
 package com.bwxor.piejfxsdk;
 
-import com.bwxor.piejfxsdk.service.CreateGenerateSRSDocumentViewService;
-import com.bwxor.piejfxsdk.service.ResourceService;
+import com.bwxor.piejfxsdk.service.*;
 import com.bwxor.piejfxsdk.state.ServiceState;
 import com.bwxor.piejfxsdk.state.StylesheetState;
 import com.bwxor.plugin.Plugin;
@@ -25,14 +24,32 @@ public class DocumentationPlugin implements Plugin {
 
         serviceState.setNotificationService(pluginContext.getServiceContainer().getNotificationService());
         serviceState.setResourceService(new ResourceService());
-        serviceState.setCreateGenerateSRSDocumentViewService(new CreateGenerateSRSDocumentViewService());
+        serviceState.setShowSRSTitlePageViewService(new ShowSRSTitlePageViewService());
+        serviceState.setShowSRSRevisionHistoryViewService(new ShowSRSRevisionHistoryViewService());
+        serviceState.setShowSRSIntroductionViewService(new ShowSRSIntroductionViewService());
+        serviceState.setShowSRSOverallDescriptionViewService(new ShowSRSOverallDescriptionViewService());
+        serviceState.setShowSRSFunctionalRequirementsViewService(new ShowSRSFunctionalRequirementsViewService());
+        serviceState.setShowSRSNonFunctionalRequirementsViewService(new ShowSRSNonFunctionalRequirementsViewService());
+        serviceState.setShowSRSExternalInterfaceRequirementsViewService(new ShowSRSExternalInterfaceRequirementsViewService());
+        serviceState.setShowSRSUseCasesViewService(new ShowSRSUseCasesViewService());
+        serviceState.setShowSRSAppendicesViewService(new ShowSRSAppendicesViewService());
+        serviceState.setShowSRSOutputFolderViewService(new ShowSRSOutputFolderViewService());
+        serviceState.setGenerateSRSPDFService(new GenerateSRSPDFService());
+        serviceState.setSrsRevisionEntryViewService(new SRSRevisionEntryViewService());
+        serviceState.setSrsKeyValueEntryViewService(new SRSKeyValueEntryViewService());
+        serviceState.setSrsStringEntryViewService(new SRSStringEntryViewService());
+        serviceState.setSrsRequirementEntryViewService(new SRSRequirementEntryViewService());
+        serviceState.setSrsUseCaseEntryViewService(new SRSUseCaseEntryViewService());
+        serviceState.setSrsTextAreaEditViewService(new SRSTextAreaEditViewService());
 
         stylesheetState.setThemeURL(pluginContext.getStylesheets().getThemeURL());
         stylesheetState.setDefaultStylesheetURL(pluginContext.getStylesheets().getDefaultStylesURL());
         stylesheetState.setDefaultMaximizedStylesheetURL(pluginContext.getStylesheets().getDefaultMaximizedURL());
 
         Menu menu = new Menu("Documentation");
-        menu.getItems().add(new MenuItem("Generate SRS Document"));
+        var generateSRSDocumentMenuItem = new MenuItem("Generate SRS Document");
+        menu.getItems().add(generateSRSDocumentMenuItem);
+        generateSRSDocumentMenuItem.setOnAction(_ -> serviceState.getShowSRSTitlePageViewService().showView());
         pluginContext.getApplicationWindow().getMenuBar().getMenus().add(menu);
     }
 
@@ -78,6 +95,6 @@ public class DocumentationPlugin implements Plugin {
 
     @Override
     public void onThemeChange(URL url) {
-        // ToDo: Handle hook
+        StylesheetState.instance.setThemeURL(url);
     }
 }

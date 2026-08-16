@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#onKeyPressed"
+            prefHeight="480.0" prefWidth="560.0" styleClass="window-root" xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.bwxor.piejfxsdk.controller.impl.SRSIntroductionViewController">
+    <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="app-window"
+          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
+        <children>
+            <!-- Title Bar -->
+            <AnchorPane fx:id="titleBarAnchorPane" onMouseDragged="#handleMovementAction"
+                        onMousePressed="#handleClickAction" prefHeight="35.0" prefWidth="560.0">
+                <children>
+                    <Label fx:id="windowTitle" alignment="CENTER" layoutY="12.0" prefHeight="17.0" prefWidth="560.0"
+                           styleClass="window-title" text="Generate SRS Document" AnchorPane.bottomAnchor="0.0"
+                           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                    <Button fx:id="closeButton" mnemonicParsing="false" onAction="#onCloseButtonClick"
+                            prefHeight="25.0" prefWidth="40.0" styleClass="button-close" text="✕"
+                            AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0"/>
+                    <Button fx:id="minimizeButton" mnemonicParsing="false" onAction="#onMinimizeButtonClick"
+                            prefHeight="25.0" prefWidth="40.0" styleClass="button-minimize" text="─"
+                            AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="5.0"/>
+                </children>
+            </AnchorPane>
+
+            <!-- Main Content -->
+            <AnchorPane styleClass="main-content" VBox.vgrow="ALWAYS">
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER"
+                            AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <VBox spacing="8" fillWidth="true" style="-fx-padding: 10;">
+
+                        <!-- Purpose -->
+                        <Label text="Purpose" styleClass="label-subtle"/>
+                        <HBox spacing="6" alignment="CENTER_LEFT">
+                            <Label fx:id="purposePreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <Button mnemonicParsing="false" onAction="#onEditPurposeClick" text="Edit"/>
+                        </HBox>
+
+                        <!-- Scope -->
+                        <Label text="Scope" styleClass="label-subtle"/>
+                        <HBox spacing="6" alignment="CENTER_LEFT">
+                            <Label fx:id="scopePreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="label-subtle" style="-fx-font-size: 11px;"/>
+                            <Button mnemonicParsing="false" onAction="#onEditScopeClick" text="Edit"/>
+                        </HBox>
+
+                        <!-- Definitions, Acronyms & Abbreviations -->
+                        <Label text="Definitions, Acronyms &amp; Abbreviations" styleClass="label-subtle"/>
+                        <ListView fx:id="definitionsList" prefHeight="90.0" maxWidth="Infinity"
+                                  onMouseClicked="#onDefinitionsListMouseClicked">
+                            <placeholder><Label text="No definitions added yet."/></placeholder>
+                        </ListView>
+                        <HBox spacing="6">
+                            <Button fx:id="buttonAddDef" mnemonicParsing="false" onAction="#onAddDefinitionClick" text="Add"/>
+                            <Button fx:id="buttonRemoveDef" mnemonicParsing="false" onAction="#onRemoveDefinitionClick" text="Remove"/>
+                        </HBox>
+
+                        <!-- References -->
+                        <Label text="References" styleClass="label-subtle"/>
+                        <ListView fx:id="referencesList" prefHeight="80.0" maxWidth="Infinity"
+                                  onMouseClicked="#onReferencesListMouseClicked">
+                            <placeholder><Label text="No references added yet."/></placeholder>
+                        </ListView>
+                        <HBox spacing="6">
+                            <Button fx:id="buttonAddRef" mnemonicParsing="false" onAction="#onAddReferenceClick" text="Add"/>
+                            <Button fx:id="buttonRemoveRef" mnemonicParsing="false" onAction="#onRemoveReferenceClick" text="Remove"/>
+                        </HBox>
+
+                        <!-- Navigation buttons -->
+                        <ButtonBar>
+                            <buttons>
+                                <Button fx:id="buttonBack" mnemonicParsing="false" onAction="#onBackButtonClick" text="Back"/>
+                                <Button fx:id="buttonNext" mnemonicParsing="false" onAction="#onNextButtonClick" text="Next"/>
+                                <Button fx:id="buttonCancel" mnemonicParsing="false" onAction="#onCancelButtonClick" text="Cancel"/>
+                            </buttons>
+                        </ButtonBar>
+                    </VBox>
+                </ScrollPane>
+            </AnchorPane>
+        </children>
+        <VBox.margin><Insets/></VBox.margin>
+    </VBox>
+    <padding><Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/></padding>
+</AnchorPane>
