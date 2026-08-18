@@ -7,7 +7,7 @@ public class ServiceState {
     private PluginNotificationService notificationService;
     private ResourceService resourceService;
 
-    // Page-navigation services
+    // SRS page-navigation services
     private ShowSRSTitlePageViewService showSRSTitlePageViewService;
     private ShowSRSRevisionHistoryViewService showSRSRevisionHistoryViewService;
     private ShowSRSIntroductionViewService showSRSIntroductionViewService;
@@ -20,12 +20,26 @@ public class ServiceState {
     private ShowSRSOutputFolderViewService showSRSOutputFolderViewService;
     private GenerateSRSPDFService generateSRSPDFService;
 
+    // Shared output-folder view service
+    private ShowOutputFolderViewService showOutputFolderViewService;
+
+    // Release Notes services
+    private ShowReleaseNotesHeaderViewService showReleaseNotesHeaderViewService;
+    private ShowReleaseNotesEntriesViewService showReleaseNotesEntriesViewService;
+    private GenerateReleaseNotesPDFService generateReleaseNotesPDFService;
+
+    // Change Request services
+    private ShowChangeRequestHeaderViewService showChangeRequestHeaderViewService;
+    private ShowChangeRequestDetailsViewService showChangeRequestDetailsViewService;
+    private GenerateChangeRequestPDFService generateChangeRequestPDFService;
+
     // Entry sub-view services
     private SRSRevisionEntryViewService srsRevisionEntryViewService;
     private SRSKeyValueEntryViewService srsKeyValueEntryViewService;
     private SRSStringEntryViewService srsStringEntryViewService;
     private SRSRequirementEntryViewService srsRequirementEntryViewService;
     private SRSUseCaseEntryViewService srsUseCaseEntryViewService;
+    private SRSTextAreaEditViewService srsTextAreaEditViewService;
 
     public static final ServiceState instance = new ServiceState();
 
@@ -37,6 +51,7 @@ public class ServiceState {
     public ResourceService getResourceService() { return resourceService; }
     public void setResourceService(ResourceService v) { this.resourceService = v; }
 
+    // SRS
     public ShowSRSTitlePageViewService getShowSRSTitlePageViewService() { return showSRSTitlePageViewService; }
     public void setShowSRSTitlePageViewService(ShowSRSTitlePageViewService v) { this.showSRSTitlePageViewService = v; }
 
@@ -70,6 +85,31 @@ public class ServiceState {
     public GenerateSRSPDFService getGenerateSRSPDFService() { return generateSRSPDFService; }
     public void setGenerateSRSPDFService(GenerateSRSPDFService v) { this.generateSRSPDFService = v; }
 
+    // Shared output folder
+    public ShowOutputFolderViewService getShowOutputFolderViewService() { return showOutputFolderViewService; }
+    public void setShowOutputFolderViewService(ShowOutputFolderViewService v) { this.showOutputFolderViewService = v; }
+
+    // Release Notes
+    public ShowReleaseNotesHeaderViewService getShowReleaseNotesHeaderViewService() { return showReleaseNotesHeaderViewService; }
+    public void setShowReleaseNotesHeaderViewService(ShowReleaseNotesHeaderViewService v) { this.showReleaseNotesHeaderViewService = v; }
+
+    public ShowReleaseNotesEntriesViewService getShowReleaseNotesEntriesViewService() { return showReleaseNotesEntriesViewService; }
+    public void setShowReleaseNotesEntriesViewService(ShowReleaseNotesEntriesViewService v) { this.showReleaseNotesEntriesViewService = v; }
+
+    public GenerateReleaseNotesPDFService getGenerateReleaseNotesPDFService() { return generateReleaseNotesPDFService; }
+    public void setGenerateReleaseNotesPDFService(GenerateReleaseNotesPDFService v) { this.generateReleaseNotesPDFService = v; }
+
+    // Change Request
+    public ShowChangeRequestHeaderViewService getShowChangeRequestHeaderViewService() { return showChangeRequestHeaderViewService; }
+    public void setShowChangeRequestHeaderViewService(ShowChangeRequestHeaderViewService v) { this.showChangeRequestHeaderViewService = v; }
+
+    public ShowChangeRequestDetailsViewService getShowChangeRequestDetailsViewService() { return showChangeRequestDetailsViewService; }
+    public void setShowChangeRequestDetailsViewService(ShowChangeRequestDetailsViewService v) { this.showChangeRequestDetailsViewService = v; }
+
+    public GenerateChangeRequestPDFService getGenerateChangeRequestPDFService() { return generateChangeRequestPDFService; }
+    public void setGenerateChangeRequestPDFService(GenerateChangeRequestPDFService v) { this.generateChangeRequestPDFService = v; }
+
+    // Entry sub-view services
     public SRSRevisionEntryViewService getSrsRevisionEntryViewService() { return srsRevisionEntryViewService; }
     public void setSrsRevisionEntryViewService(SRSRevisionEntryViewService v) { this.srsRevisionEntryViewService = v; }
 
@@ -85,7 +125,6 @@ public class ServiceState {
     public SRSUseCaseEntryViewService getSrsUseCaseEntryViewService() { return srsUseCaseEntryViewService; }
     public void setSrsUseCaseEntryViewService(SRSUseCaseEntryViewService v) { this.srsUseCaseEntryViewService = v; }
 
-    private SRSTextAreaEditViewService srsTextAreaEditViewService;
     public SRSTextAreaEditViewService getSrsTextAreaEditViewService() { return srsTextAreaEditViewService; }
     public void setSrsTextAreaEditViewService(SRSTextAreaEditViewService v) { this.srsTextAreaEditViewService = v; }
 }

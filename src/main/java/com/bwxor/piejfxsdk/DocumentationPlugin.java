@@ -24,6 +24,8 @@ public class DocumentationPlugin implements Plugin {
 
         serviceState.setNotificationService(pluginContext.getServiceContainer().getNotificationService());
         serviceState.setResourceService(new ResourceService());
+
+        // SRS services
         serviceState.setShowSRSTitlePageViewService(new ShowSRSTitlePageViewService());
         serviceState.setShowSRSRevisionHistoryViewService(new ShowSRSRevisionHistoryViewService());
         serviceState.setShowSRSIntroductionViewService(new ShowSRSIntroductionViewService());
@@ -35,6 +37,21 @@ public class DocumentationPlugin implements Plugin {
         serviceState.setShowSRSAppendicesViewService(new ShowSRSAppendicesViewService());
         serviceState.setShowSRSOutputFolderViewService(new ShowSRSOutputFolderViewService());
         serviceState.setGenerateSRSPDFService(new GenerateSRSPDFService());
+
+        // Shared output folder view
+        serviceState.setShowOutputFolderViewService(new ShowOutputFolderViewService());
+
+        // Release Notes services
+        serviceState.setShowReleaseNotesHeaderViewService(new ShowReleaseNotesHeaderViewService());
+        serviceState.setShowReleaseNotesEntriesViewService(new ShowReleaseNotesEntriesViewService());
+        serviceState.setGenerateReleaseNotesPDFService(new GenerateReleaseNotesPDFService());
+
+        // Change Request services
+        serviceState.setShowChangeRequestHeaderViewService(new ShowChangeRequestHeaderViewService());
+        serviceState.setShowChangeRequestDetailsViewService(new ShowChangeRequestDetailsViewService());
+        serviceState.setGenerateChangeRequestPDFService(new GenerateChangeRequestPDFService());
+
+        // Entry sub-view services
         serviceState.setSrsRevisionEntryViewService(new SRSRevisionEntryViewService());
         serviceState.setSrsKeyValueEntryViewService(new SRSKeyValueEntryViewService());
         serviceState.setSrsStringEntryViewService(new SRSStringEntryViewService());
@@ -47,9 +64,17 @@ public class DocumentationPlugin implements Plugin {
         stylesheetState.setDefaultMaximizedStylesheetURL(pluginContext.getStylesheets().getDefaultMaximizedURL());
 
         Menu menu = new Menu("Documentation");
-        var generateSRSDocumentMenuItem = new MenuItem("Generate SRS Document");
-        menu.getItems().add(generateSRSDocumentMenuItem);
+
+        var generateSRSDocumentMenuItem = new MenuItem("Software Requirement Specification");
         generateSRSDocumentMenuItem.setOnAction(_ -> serviceState.getShowSRSTitlePageViewService().showView());
+
+        var generateReleaseNotesMenuItem = new MenuItem("Release Notes");
+        generateReleaseNotesMenuItem.setOnAction(_ -> serviceState.getShowReleaseNotesHeaderViewService().showView());
+
+        var generateChangeRequestMenuItem = new MenuItem("Change Request");
+        generateChangeRequestMenuItem.setOnAction(_ -> serviceState.getShowChangeRequestHeaderViewService().showView());
+
+        menu.getItems().addAll(generateSRSDocumentMenuItem, generateReleaseNotesMenuItem, generateChangeRequestMenuItem);
         pluginContext.getApplicationWindow().getMenuBar().getMenus().add(menu);
     }
 

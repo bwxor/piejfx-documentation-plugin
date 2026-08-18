@@ -4,12 +4,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#onKeyPressed"
-            prefHeight="350.0" prefWidth="520.0" styleClass="window-root" xmlns="http://javafx.com/javafx/17.0.12"
+            prefHeight="620.0" prefWidth="520.0" styleClass="window-root" xmlns="http://javafx.com/javafx/17.0.12"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.bwxor.piejfxsdk.controller.impl.SRSOutputFolderViewController">
+            fx:controller="com.bwxor.piejfxsdk.controller.impl.ChangeRequestDetailsViewController">
     <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="app-window"
           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
           AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
@@ -19,7 +17,7 @@
                         onMousePressed="#handleClickAction" prefHeight="35.0" prefWidth="520.0">
                 <children>
                     <Label fx:id="windowTitle" alignment="CENTER" layoutY="12.0" prefHeight="17.0" prefWidth="520.0"
-                           styleClass="window-title" text="Generate SRS Document" AnchorPane.bottomAnchor="0.0"
+                           styleClass="window-title" text="Generate Change Request" AnchorPane.bottomAnchor="0.0"
                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
                     <Button fx:id="closeButton" mnemonicParsing="false" onAction="#onCloseButtonClick"
                             prefHeight="25.0" prefWidth="40.0" styleClass="button-close" text="✕"
@@ -39,51 +37,50 @@
                           AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0"
                           AnchorPane.rightAnchor="10.0" AnchorPane.bottomAnchor="10.0">
 
-                        <Label text="Watermark File" styleClass="label-subtle"/>
+                        <Label text="Description" styleClass="label-subtle"/>
                         <HBox spacing="6" alignment="CENTER_LEFT">
-                            <TextField fx:id="watermarkFileField" HBox.hgrow="ALWAYS" maxWidth="Infinity"
-                                       editable="false" promptText="Select an image..."/>
-                            <Button fx:id="buttonBrowseWatermarkFile" mnemonicParsing="false"
-                                    onAction="#onBrowseWatermarkFileButtonClick"
-                                    text="..."/>
-                            <Button fx:id="buttonClearWatermarkFile" mnemonicParsing="false"
-                                    onAction="#onClearWatermarkFileButtonClick"
-                                    text="Clear"/>
+                            <TextField fx:id="descriptionPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
+                            <Button mnemonicParsing="false" onAction="#onEditDescriptionClick" text="Edit"/>
                         </HBox>
 
-                        <Label text="Watermark Position" styleClass="label-subtle"/>
-                        <ComboBox fx:id="watermarkPositionComboBox" id="comboId" layoutX="210.0" layoutY="108.0"
-                                  prefHeight="27.0"
-                                  prefWidth="102.0" value="Top-Left">
-                            <items>
-                                <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="Top-Left"/>
-                                    <String fx:value="Top-Right"/>
-                                    <String fx:value="Bottom-Left"/>
-                                    <String fx:value="Bottom-Right"/>
-                                </FXCollections>
-                            </items>
-                        </ComboBox>
-
-                        <Label text="Watermark Scale" styleClass="label-subtle"/>
-                        <TextField fx:id="watermarkScaleField" HBox.hgrow="ALWAYS" maxWidth="Infinity" promptText="e.g. 0.25"/>
-
-                        <Label text="Output Folder" styleClass="label-subtle"/>
+                        <Label text="Justification / Business Case" styleClass="label-subtle"/>
                         <HBox spacing="6" alignment="CENTER_LEFT">
-                            <TextField fx:id="outputFolderField" HBox.hgrow="ALWAYS" maxWidth="Infinity"
-                                       editable="false" promptText="Select a folder..."/>
-                            <Button fx:id="buttonBrowseOutputFolder" mnemonicParsing="false"
-                                    onAction="#onBrowseOutputFolderButtonClick"
-                                    text="..."/>
+                            <TextField fx:id="justificationPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
+                            <Button mnemonicParsing="false" onAction="#onEditJustificationClick" text="Edit"/>
                         </HBox>
 
-                        <!-- Navigation buttons -->
+                        <!-- Impacted Components -->
+                        <Label text="Impacted Components" styleClass="label-subtle"/>
+                        <ListView fx:id="impactedComponentsList" prefHeight="120.0"/>
+                        <HBox spacing="6">
+                            <Button mnemonicParsing="false" onAction="#onAddImpactClick" text="Add"/>
+                            <Button mnemonicParsing="false" onAction="#onRemoveImpactClick" text="Remove"/>
+                        </HBox>
+
+                        <Label text="Testing Strategy" styleClass="label-subtle"/>
+                        <HBox spacing="6" alignment="CENTER_LEFT">
+                            <TextField fx:id="testingStrategyPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
+                            <Button mnemonicParsing="false" onAction="#onEditTestingStrategyClick" text="Edit"/>
+                        </HBox>
+
+                        <Label text="Rollback Plan" styleClass="label-subtle"/>
+                        <HBox spacing="6" alignment="CENTER_LEFT">
+                            <TextField fx:id="rollbackPlanPreview" HBox.hgrow="ALWAYS" maxWidth="Infinity" editable="false" focusTraversable="false"/>
+                            <Button mnemonicParsing="false" onAction="#onEditRollbackPlanClick" text="Edit"/>
+                        </HBox>
+
+                        <Label text="Approved By" styleClass="label-subtle"/>
+                        <TextField fx:id="approvedByField" maxWidth="Infinity" promptText="e.g. Jane Doe"/>
+
+                        <Label text="Approval Date" styleClass="label-subtle"/>
+                        <TextField fx:id="approvalDateField" maxWidth="Infinity" promptText="e.g. 2025-07-15"/>
+
                         <ButtonBar>
                             <buttons>
                                 <Button fx:id="buttonBack" mnemonicParsing="false" onAction="#onBackButtonClick"
                                         text="Back"/>
-                                <Button fx:id="buttonGenerate" mnemonicParsing="false" onAction="#onGenerateButtonClick"
-                                        text="Generate"/>
+                                <Button fx:id="buttonNext" mnemonicParsing="false" onAction="#onNextButtonClick"
+                                        text="Next"/>
                                 <Button fx:id="buttonCancel" mnemonicParsing="false" onAction="#onCancelButtonClick"
                                         text="Cancel"/>
                             </buttons>

@@ -1,7 +1,6 @@
 package com.bwxor.piejfxsdk.controller.impl;
 
 import com.bwxor.piejfxsdk.controller.MovableViewController;
-import com.bwxor.piejfxsdk.state.SRSDocumentState;
 import com.bwxor.piejfxsdk.state.ServiceState;
 import com.bwxor.piejfxsdk.type.WatermarkPosition;
 import javafx.fxml.FXML;
@@ -16,8 +15,16 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.function.BiConsumer;
+import java.util.function.DoubleConsumer;
+import java.util.function.Function;
 
-public class SRSOutputFolderViewController extends MovableViewController {
+/**
+ * Generic output-folder / watermark view reused by all document generators.
+ * Callers must inject a back-action and a generate-function via
+ * {@link #configure(String, Runnable, Function, BiConsumer)}.
+ */
+public class OutputFolderViewController extends MovableViewController {
 
     @FXML
     private Label windowTitle;
@@ -32,8 +39,32 @@ public class SRSOutputFolderViewController extends MovableViewController {
     @FXML
     private Button buttonCancel;
 
-    public void setWindowTitle(String title) {
+    private Runnable backAction;
+    private Function<String, Boolean> generateAction;
+    /** Called after the user picks a watermark file (file, or null when cleared). */
+    private BiConsumer<File, WatermarkPosition> watermarkFileConsumer;
+    /** Called with the parsed scale value just before generate is invoked. */
+    private DoubleConsumer watermarkScaleConsumer;
+
+    private File selectedWatermarkFile;
+
+    /**
+     * @param title               Window title text.
+     * @param backAction          Invoked when the user clicks Back.
+     * @param generateAction      Accepts the chosen output folder path; returns true on success.
+     * @param watermarkConsumer   Receives the chosen watermark File + position (null file = cleared).
+     * @param scaleConsumer       Receives the parsed watermark scale just before generation.
+     */
+    public void configure(String title,
+                          Runnable backAction,
+                          Function<String, Boolean> generateAction,
+                          BiConsumer<File, WatermarkPosition> watermarkConsumer,
+                          DoubleConsumer scaleConsumer) {
         this.windowTitle.setText(title);
+        this.backAction = backAction;
+        this.generateAction = generateAction;
+        this.watermarkFileConsumer = watermarkConsumer;
+        this.watermarkScaleConsumer = scaleConsumer;
     }
 
     @FXML
@@ -49,56 +80,58 @@ public class SRSOutputFolderViewController extends MovableViewController {
 
     @FXML
     public void onClearWatermarkFileButtonClick() {
-        SRSDocumentState srsDocumentState = SRSDocumentState.instance;
-
         watermarkFileField.clear();
-        srsDocumentState.setWatermarkFile(null);
+        selectedWatermarkFile = null;
+        if (watermarkFileConsumer != null) {
+            watermarkFileConsumer.accept(null, resolveWatermarkPosition());
+        }
     }
 
     @FXML
     public void onBrowseWatermarkFileButtonClick() {
-        SRSDocumentState srsDocumentState = SRSDocumentState.instance;
-
         FileChooser chooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter =
-                new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.JPG", "*.PNG");
-        chooser.getExtensionFilters().add(extFilter);
+        chooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.JPG", "*.PNG"));
         chooser.setTitle("Select Watermark File");
         Stage stage = (Stage) buttonCancel.getScene().getWindow();
         File selected = chooser.showOpenDialog(stage);
         if (selected != null) {
+            selectedWatermarkFile = selected;
             watermarkFileField.setText(selected.getAbsolutePath());
-            srsDocumentState.setWatermarkFile(selected);
         }
     }
 
     @FXML
     public void onBackButtonClick() {
         ((Stage) buttonCancel.getScene().getWindow()).close();
-        ServiceState.instance.getShowSRSAppendicesViewService().showView();
+        if (backAction != null) {
+            backAction.run();
+        }
     }
 
     @FXML
     public void onGenerateButtonClick() {
         ServiceState serviceState = ServiceState.instance;
-        SRSDocumentState srsDocumentState = SRSDocumentState.instance;
 
         if (outputFolderField.getText().trim().isEmpty()) {
             serviceState.getNotificationService().showNotificationOk("Please select an output folder.");
             return;
         }
 
-        srsDocumentState.setWatermarkPosition(WatermarkPosition.match(watermarkPositionComboBox.getValue()));
-        srsDocumentState.setWatermarkScale(parseDoubleOrDefault(watermarkScaleField.getText()));
+        if (watermarkFileConsumer != null) {
+            watermarkFileConsumer.accept(selectedWatermarkFile, resolveWatermarkPosition());
+        }
+        if (watermarkScaleConsumer != null) {
+            watermarkScaleConsumer.accept(getWatermarkScale());
+        }
 
-        boolean success = serviceState.getGenerateSRSPDFService().generatePdf(outputFolderField.getText().trim());
+        boolean success = generateAction.apply(outputFolderField.getText().trim());
         if (success) {
             serviceState.getNotificationService().showNotificationOk("Successfully generated.");
-            ((Stage) buttonCancel.getScene().getWindow()).close();
         } else {
             serviceState.getNotificationService().showNotificationOk("An error occurred while generating the PDF.");
-            ((Stage) buttonCancel.getScene().getWindow()).close();
         }
+        ((Stage) buttonCancel.getScene().getWindow()).close();
     }
 
     @FXML
@@ -113,14 +146,20 @@ public class SRSOutputFolderViewController extends MovableViewController {
         }
     }
 
+    private WatermarkPosition resolveWatermarkPosition() {
+        return WatermarkPosition.match(watermarkPositionComboBox.getValue());
+    }
+
     private double parseDoubleOrDefault(String text) {
-        if (text == null || text.isBlank()) {
-            return 0.5;
-        }
+        if (text == null || text.isBlank()) return 0.5;
         try {
             return Double.parseDouble(text.trim());
         } catch (NumberFormatException e) {
             return 0.5;
         }
+    }
+
+    public double getWatermarkScale() {
+        return parseDoubleOrDefault(watermarkScaleField.getText());
     }
 }

@@ -30,8 +30,8 @@ public class GenerateSRSPDFService {
     private static final float PAGE_WIDTH = PDRectangle.A4.getWidth();
     private static final float MAX_TEXT_WIDTH = PAGE_WIDTH - LEFT_MARGIN - RIGHT_MARGIN;
 
-    private final PDFont fontRegular = new PDType1Font(Standard14Fonts.FontName.HELVETICA);
-    private final PDFont fontBold = new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD);
+    private PDFont fontRegular;
+    private PDFont fontBold;
 
     private PDPage currentPage;
     private PDPageContentStream currentStream;
@@ -39,6 +39,8 @@ public class GenerateSRSPDFService {
 
     public boolean generatePdf(String outputFolderPath) {
         try (PDDocument document = new PDDocument()) {
+            fontRegular = new PDType1Font(Standard14Fonts.FontName.HELVETICA);
+            fontBold = new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD);
             addTitleToDocument(document);
             addRevisionHistoryToDocument(document);
             addIntroductionToDocument(document);
@@ -53,7 +55,7 @@ public class GenerateSRSPDFService {
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
             String timestamp = LocalDateTime.now().format(formatter);
-            String fileName = "generated-" + timestamp + ".pdf";
+            String fileName = "requirement-specification-" + timestamp + ".pdf";
 
             Path fullPath = Paths.get(outputFolderPath, fileName);
             document.save(fullPath.toFile());
@@ -293,14 +295,65 @@ public class GenerateSRSPDFService {
         StringBuilder currentLine = new StringBuilder();
 
         for (String word : words) {
-            String potentialLine = currentLine.isEmpty() ? word : currentLine + " " + word;
-            float stringWidth = (font.getStringWidth(potentialLine) / 1000f) * fontSize;
+            // Word is wider than a full line on its own: hard-break with hyphens
+            if ((font.getStringWidth(word) / 1000f) * fontSize > maxWidth) {
+                if (!currentLine.isEmpty()) {
+                    lines.add(currentLine.toString());
+                    currentLine = new StringBuilder();
+                }
+                StringBuilder chunk = new StringBuilder();
+                for (char c : word.toCharArray()) {
+                    String potential = chunk + String.valueOf(c);
+                    String withHyphen = chunk + "-";
+                    if ((font.getStringWidth(potential) / 1000f) * fontSize <= maxWidth) {
+                        chunk.append(c);
+                    } else {
+                        lines.add(withHyphen);
+                        chunk = new StringBuilder(String.valueOf(c));
+                    }
+                }
+                if (!chunk.isEmpty()) currentLine = chunk;
+                continue;
+            }
 
-            if (stringWidth <= maxWidth) {
+            String potentialLine = currentLine.isEmpty() ? word : currentLine + " " + word;
+            float potentialWidth = (font.getStringWidth(potentialLine) / 1000f) * fontSize;
+
+            if (potentialWidth <= maxWidth) {
+                // Word fits: append normally
                 currentLine.append(currentLine.isEmpty() ? "" : " ").append(word);
             } else {
-                lines.add(currentLine.toString());
-                currentLine = new StringBuilder(word);
+                float currentLineWidth = currentLine.isEmpty() ? 0f
+                        : (font.getStringWidth(currentLine.toString()) / 1000f) * fontSize;
+                if (currentLineWidth <= maxWidth * 0.5f) {
+                    // Line is less than half full: wrap the whole word to the next line
+                    lines.add(currentLine.toString());
+                    currentLine = new StringBuilder(word);
+                } else {
+                    // Line is more than half full: hyphenate the word at the break point
+                    StringBuilder chunk = new StringBuilder();
+                    String prefix = currentLine.isEmpty() ? "" : currentLine + " ";
+                    for (char c : word.toCharArray()) {
+                        String withChar    = prefix + chunk + c;
+                        String withHyphen  = prefix + chunk + "-";
+                        if ((font.getStringWidth(withChar) / 1000f) * fontSize <= maxWidth) {
+                            chunk.append(c);
+                        } else if ((font.getStringWidth(withHyphen) / 1000f) * fontSize <= maxWidth) {
+                            lines.add(withHyphen);
+                            prefix = "";
+                            chunk = new StringBuilder(String.valueOf(c));
+                        } else {
+                            // Even the hyphenated prefix is too long; flush current line and restart
+                            if (!currentLine.isEmpty()) {
+                                lines.add(currentLine.toString());
+                                currentLine = new StringBuilder();
+                                prefix = "";
+                            }
+                            chunk.append(c);
+                        }
+                    }
+                    currentLine = new StringBuilder(prefix + chunk);
+                }
             }
         }
 
