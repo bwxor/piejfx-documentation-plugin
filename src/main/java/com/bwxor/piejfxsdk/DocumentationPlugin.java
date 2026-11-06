@@ -4,6 +4,7 @@ import com.bwxor.piejfxsdk.service.*;
 import com.bwxor.piejfxsdk.state.ServiceState;
 import com.bwxor.piejfxsdk.state.StylesheetState;
 import com.bwxor.plugin.Plugin;
+import com.bwxor.plugin.dto.TabState;
 import com.bwxor.plugin.input.PluginContext;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -121,5 +122,10 @@ public class DocumentationPlugin implements Plugin {
     @Override
     public void onThemeChange(URL url) {
         StylesheetState.instance.setThemeURL(url);
+    }
+
+    @Override
+    public void onTabChange(TabState tabState) {
+
     }
 }
