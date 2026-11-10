@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.bwxor</groupId>
-    <artifactId>piejfx-documentation-plugin</artifactId>
+    <artifactId>docugen</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>piejfx-documentation-plugin</name>
+    <name>docugen</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -54,7 +54,7 @@
     </dependencies>
 
     <build>
-        <finalName>piejfx-documentation-plugin</finalName>
+        <finalName>docugen</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
